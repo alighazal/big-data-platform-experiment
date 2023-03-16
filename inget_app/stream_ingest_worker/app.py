@@ -1,10 +1,9 @@
 import pika, sys, os, json
 from cassandra.cqlengine.management import sync_table, create_keyspace_simple
 from cassandra.cqlengine import connection
-from cassandra.cqlengine.query import BatchQuery
 from dateutil import parser
-
 from data_model.journy import Journy
+import requests
 
 def main():
     rmq_connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -40,6 +39,11 @@ def main():
                 congestion_surcharge=body_josn["congestion_surcharge"],
                 airport_fee=body_josn["airport_fee"]
                 )
+            
+            log_event = { "src":"messaging", "records_count" : 1, "status": "success" }
+            logger_url = "localhost:5300/logs/"
+            x = requests.post(logger_url, json = log_event)
+            print (x)
         except Exception as e:
             print (e)
 
