@@ -1,0 +1,3 @@
+
+docker build -t ignest-event-producer .
+docker run -it --network="host" ignest-event-producer:latest

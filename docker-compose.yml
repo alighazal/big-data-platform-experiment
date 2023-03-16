@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  # cassandra:
+  #   image: cassandra:latest
+  #   ports:
+  #     - 9042:9042
+  #   volumes:
+  #     - ./platform/cassandra:/var/lib/cassandra
+  #   environment:
+  #     - CASSANDRA_CLUSTER_NAME=demo
+
+  bulk-ingest-worker:
+    build: bulk_ingest_worker
+    image: bulk-ingest-worker
+    volumes:
+      - ./bulk_ingest_worker/data/:/app/data
+    restart: "always"
+    depends_on:
+      - rabbit
+    networks:
+      - host
+
+  rabbit:
+    image: rabbitmq:3.11-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+
