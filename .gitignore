@@ -1,2 +1,8 @@
 platform/
+mysql-data/
 inget_app/bulk_ingest_worker/data/$yellow_tripdata_2022-01.parquet
+heyy.db
+ingest_manager/stream_ingest_manager/data_model/__pycache__/
+experiments/process_status_tracker/__pycache__
+experiments/process_status_tracker/models.pyc
+inget_app/stream_ingest_worker/data_model/__pycache__/

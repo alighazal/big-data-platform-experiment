@@ -21,7 +21,7 @@ def main():
             body_josn =  json.loads(body)
             if ( "bucket_name" in body_josn and "blob_name" in body_josn ):
                 downloand_path = download_blob_from_google_storage( body_josn["bucket_name"], body_josn["blob_name"] )
-                # ingest file
+                # TODO ingest file
             else:
                 print ("unrecognized message format")
         except Exception:
